@@ -186,3 +186,7 @@ button.setOnAction((ActionEvent event) -> label.setText("Submitted"));
 
 # Summary
 The behavior parameterization enables separation of the behavior of the object, thereby enhancing the reusability of the code and creating a flexible API. Also, using lambda of functional programming can greatly improve readability. In the following post, let’s learn about the __lambda expression__ we used today.
+
+
+-----
+Reference : https://www.manning.com/books/java-8-in-action
