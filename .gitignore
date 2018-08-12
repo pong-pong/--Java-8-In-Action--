@@ -1,7 +1,7 @@
 .vscode/*
 .DS_Store
-./src
-./ai
+src/*
+.ai/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
