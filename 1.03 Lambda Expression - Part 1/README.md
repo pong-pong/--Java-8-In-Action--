@@ -146,7 +146,7 @@ public static <T> List<T> filter(List<T> list, Predicate<T> p) {
     List<T> result = new ArrayList<>();
     for(T e : list)
         if(p.test(e))
-            result.add(s);
+            result.add(e);
     return result;
 }
 
@@ -167,35 +167,13 @@ public interface Consumer<T> {
     void accept(T t);
 }
 
-public static <T> void<T> forEach(List<T> list, Consumer<T> c) {
+public static <T> void forEach(List<T> list, Consumer<T> c) {
     for(T e : list)
         c.accept(e);
 }
 
 ...
 forEach(students, (Student s) -> System.out.println(s.getName())); 
-...
-```
-
-## Supplier
-The `java.util.function.Supplier<T>` interface defines an abstract method named `get`, and returns an object of the generic type `T` with no argument (`void`). The following example uses `forEach` and lambda to generate messages.
-
-``` Java
-// java.util.function.Supplier<T>
-@FunctionalInterface
-public interface Supplier<T> {
-    T get();
-}
-
-public static <T> List<T> get(List<T> list, Supplier<T> s) {
-    List<T> result = new ArrayList<>();
-    for(T e : list)
-        result.add(e + s.get());
-    return result;
-}
-
-...
-List<String> messages = get(attendees, () -> " attended today"); 
 ...
 ```
 
@@ -210,9 +188,9 @@ public interface Function<T, R> {
     R apply(T t);
 }
 
-public static <T> List<T> map(List<T> list, Function<T, R> f) {
-    List<T> result = new ArrayList<>();
-    for(T e : list)
+public static <T, R> List<R> map(List<T> list, Function<T, R> f) {
+    List<R> result = new ArrayList<>();
+    for (T e : list)
         result.add(f.apply(e));
     return result;
 }
@@ -223,7 +201,7 @@ List<Integer> ASCII = map(characters, (Character c) -> c.getNumericValue(c));
 ```
 
 ## Primitive type specialization
-So far, we have looked at four functional types, `Predicate<T>`, `Consumer<T>`, `Supplier<T>` and `Function<T, R>`. All types of Java correspond to Reference type or Primitive type. However, we can __only use Reference types in generic parameters__ (eg, `T`, `R`) (in Java). Java provides auto boxing and unboxing functions that convert primitive types to reference types and vice versa, but this conversion process costs.
+So far, we have looked at four functional types, `Predicate<T>`, `Consumer<T>` and `Function<T, R>`. All types of Java correspond to Reference type or Primitive type. However, we can __only use Reference types in generic parameters__ (eg, `T`, `R`) (in Java). Java provides auto boxing and unboxing functions that convert primitive types to reference types and vice versa, but this conversion process costs.
 
 Java 8 provides a special version of the functional interface to avoid auto boxing when using primitive types as inputs and outputs. For example, in the example below, `IntPredicate` does not box a value of 1000, but `Predicate<Integer>` boxes a value of 1000 into an Integer object.
 
